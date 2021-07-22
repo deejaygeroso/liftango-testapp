@@ -12,6 +12,8 @@ const DEFAULT_CENTER = {
 
 const App = () => {
   const [trips, setTrips] = useState([]);
+  const [selectedTripCount, setTripCount] = useState(0);
+  const [selectedDate, setSelectedDate] = useState('');
   const [mapInstance, setMapInstance] = useState(null);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: '',
@@ -34,7 +36,11 @@ const App = () => {
 
   const datesWithTrips = getDatesWithExistingTrips(trips);
 
-  console.log('datesWithTrips', datesWithTrips);
+  const selectDate = (selectedDateFromTripButton) => {
+    const matchedTrips = trips.filter((trip) => new Date(trip.startTime).toDateString() === selectedDateFromTripButton);
+    setTripCount(matchedTrips.length);
+    setSelectedDate(selectedDateFromTripButton);
+  };
 
   return (
     <div>
@@ -62,7 +68,7 @@ const App = () => {
         </GoogleMap>
       )}
       {datesWithTrips.map((tripDate) => (
-        <TripButton tripDate={tripDate} selectDate={() => {}} />
+        <TripButton tripDate={tripDate} selectDate={selectDate} />
       ))}
     </div>
   );
