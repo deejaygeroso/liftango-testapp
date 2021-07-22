@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import moment from 'moment'; // I just used toDateString instead of this package for this test.
 import { GoogleMap, OverlayView, useLoadScript } from '@react-google-maps/api';
 import './app.css';
 import MapMarkerPin from './components/MapMarkerPin';
