@@ -56,16 +56,24 @@ const App = () => {
           }}
           zoom={16}
         >
-          <OverlayView
-            key={`example_marker_overlay`}
-            position={{
-              lat: DEFAULT_CENTER.lat,
-              lng: DEFAULT_CENTER.lng,
-            }}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <MapMarkerPin type={stop.type} />
-          </OverlayView>
+          {trips.length !== 0 &&
+            trips.map((trip) => (
+              <>
+                {new Date(trip.startTime).toDateString() === selectedDate &&
+                  trip.stops.map((stop) => (
+                    <OverlayView
+                      key={`maker_overlay_${trip.id}_${stop.address.id}`}
+                      position={{
+                        lat: stop.address.latitude,
+                        lng: stop.address.longitude,
+                      }}
+                      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                    >
+                      <MapMarkerPin stopType={stop.type} />
+                    </OverlayView>
+                  ))}
+              </>
+            ))}
         </GoogleMap>
       )}
       {datesWithTrips.map((tripDate) => (
