@@ -79,6 +79,7 @@ const App = () => {
       {datesWithTrips.map((tripDate) => (
         <TripButton key={`tripButton_${tripDate}`} tripDate={tripDate} selectDate={selectDate} />
       ))}
+      <MapMarkerPin />
     </div>
   );
 };
