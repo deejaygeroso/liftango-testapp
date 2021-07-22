@@ -29,11 +29,22 @@ const App = () => {
       .then((res) => setTrips(res.trips));
   }, []);
 
-  const selectDate = (selectedDateFromTripButton) => {
+  const selectDateThenReAdjustMap = (selectedDateFromTripButton) => {
     const matchedTrips = trips.filter((trip) => new Date(trip.startTime).toDateString() === selectedDateFromTripButton);
     setTripCount(matchedTrips.length);
     setSelectedDate(selectedDateFromTripButton);
+
+    const bounds = new window.google.maps.LatLngBounds();
+    matchedTrips.map((trip) => {
+      trip.stops.map((stop) => {
+        bounds.extend(new window.google.maps.LatLng(stop.address.latitude, stop.address.longitude));
+      });
+    });
+
+    mapInstance.fitBounds(bounds);
   };
+
+  const hasUserSelectedADateTrip = trips.length !== 0 && selectedTripCount;
 
   return (
     <div>
@@ -49,13 +60,13 @@ const App = () => {
           }}
           zoom={16}
         >
-          {trips.length !== 0 &&
+          {hasUserSelectedADateTrip &&
             trips.map((trip) => (
               <>
                 {new Date(trip.startTime).toDateString() === selectedDate &&
                   trip.stops.map((stop) => (
                     <OverlayView
-                      key={`maker_overlay_${trip.id}_${stop.address.id}`}
+                      key={`maker_overlay_${Math.random()}`}
                       position={{
                         lat: stop.address.latitude,
                         lng: stop.address.longitude,
@@ -69,7 +80,7 @@ const App = () => {
             ))}
         </GoogleMap>
       )}
-      <TripButtons trips={trips} selectDate={selectDate} />
+      <TripButtons trips={trips} selectDate={selectDateThenReAdjustMap} />
     </div>
   );
 };
