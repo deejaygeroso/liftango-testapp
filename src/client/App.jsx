@@ -34,7 +34,8 @@ const App = () => {
           onLoad={onMapLoad}
           mapContainerStyle={{
             height: '400px',
-            width: '800px',
+            margin: '0 auto',
+            width: '80%',
           }}
           zoom={16}
         >
