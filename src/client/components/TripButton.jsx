@@ -5,6 +5,8 @@ const StyledTripButton = styled.button`
   background: pink;
   border: none;
   border-radius: 3px;
+  color: white;
+  cursor: pointer;
   height: 30px;
   width: 120px;
 `;
