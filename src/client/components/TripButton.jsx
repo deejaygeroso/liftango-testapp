@@ -8,6 +8,7 @@ const StyledTripButton = styled.button`
   color: white;
   cursor: pointer;
   height: 30px;
+  margin: 5px 0 5px 5px;
   width: 120px;
 `;
 
