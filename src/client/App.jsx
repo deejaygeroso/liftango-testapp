@@ -3,7 +3,7 @@ import moment from 'moment';
 import { GoogleMap, OverlayView, useLoadScript } from '@react-google-maps/api';
 import './app.css';
 import MapMarkerPin from './components/MapMarkerPin';
-import TripButton from './components/TripButton';
+import TripButtons from './components/TripButtons';
 
 const DEFAULT_CENTER = {
   lat: -32.9269165,
@@ -28,13 +28,6 @@ const App = () => {
       .then((res) => res.json())
       .then((res) => setTrips(res.trips));
   }, []);
-
-  const getDatesWithExistingTrips = (listOfTrips) => {
-    const listOfTripsInDateString = listOfTrips.map((trip) => new Date(trip.startTime).toDateString());
-    return [...new Set(listOfTripsInDateString)];
-  };
-
-  const datesWithTrips = getDatesWithExistingTrips(trips);
 
   const selectDate = (selectedDateFromTripButton) => {
     const matchedTrips = trips.filter((trip) => new Date(trip.startTime).toDateString() === selectedDateFromTripButton);
@@ -76,9 +69,7 @@ const App = () => {
             ))}
         </GoogleMap>
       )}
-      {datesWithTrips.map((tripDate) => (
-        <TripButton key={`tripButton_${tripDate}`} tripDate={tripDate} selectDate={selectDate} />
-      ))}
+      <TripButtons trips={trips} selectDate={selectDate} />
     </div>
   );
 };
