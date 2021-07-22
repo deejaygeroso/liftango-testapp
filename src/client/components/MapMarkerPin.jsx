@@ -15,6 +15,13 @@ const handleFontColorByStopType = (stopTypeChar) => {
   return 'color: cornflowerblue;';
 };
 
+const handleUpperLegBackgroundColorByStopType = (stopTypeChar) => {
+  if (stopTypeChar === 'A') {
+    return 'background-color: #c15579;';
+  }
+  return 'background-color: #4479d8;';
+};
+
 const StyledMarkerWrapper = styled.div`
   align-items: center;
   display: flex;
@@ -32,7 +39,13 @@ const StyledMarkerWrapper = styled.div`
   }
 `;
 
-const StyledMarkerLeg = styled.div`
+const StyledMarkerUpperLeg = styled.div`
+  height: 2px;
+  width: 3px;
+  ${({ stopTypeChar }) => handleUpperLegBackgroundColorByStopType(stopTypeChar)};
+`;
+
+const StyledMarkerLowerLeg = styled.div`
   border-bottom-left-radius: 25%;
   border-bottom-right-radius: 25%;
   height: 15px;
@@ -72,7 +85,8 @@ const MapMarkerPin = (props) => {
         <StyledMarkerCircle stopTypeChar={stopTypeChar}>
           <div>{stopTypeChar}</div>
         </StyledMarkerCircle>
-        <StyledMarkerLeg stopTypeChar={stopTypeChar} />
+        <StyledMarkerUpperLeg stopTypeChar={stopTypeChar} />
+        <StyledMarkerLowerLeg stopTypeChar={stopTypeChar} />
       </div>
     </StyledMarkerWrapper>
   );
