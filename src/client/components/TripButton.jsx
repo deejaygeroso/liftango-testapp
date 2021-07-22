@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledTripButton = styled.button`
-  background: pink;
+  background: palevioletred;
   border: none;
   border-radius: 3px;
   color: white;
