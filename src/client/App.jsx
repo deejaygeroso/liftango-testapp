@@ -48,7 +48,7 @@ const App = () => {
 
   return (
     <div>
-      {selectedDate && <h1>{`Date: ${selectedDate}, Count: ${selectedTripCount}`}</h1>}
+      <h1>{selectedDate ? `Date: ${selectedDate}, No. Of Trips: ${selectedTripCount}` : 'Please select a date below...'}</h1>
       {isLoaded && (
         <GoogleMap
           center={DEFAULT_CENTER}
