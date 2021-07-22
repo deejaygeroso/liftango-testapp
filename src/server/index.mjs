@@ -18,5 +18,19 @@ app.get('/api/getTrips', async (req, res) => {
 
   res.send({ trips });
 });
+app.get('/api/getTripById/:id', async (req, res) => {
+  const trip = await Ride.findOne({
+    where: { id: req.params.id },
+    include: [
+      User,
+      {
+        model: Stop,
+        include: [Address],
+      },
+    ],
+  });
+
+  res.send(trip);
+});
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
