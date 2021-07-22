@@ -80,7 +80,7 @@ const App = () => {
             ))}
         </GoogleMap>
       )}
-      <TripButtons trips={trips} selectDate={selectDateThenReAdjustMap} />
+      <TripButtons trips={trips} selectDate={selectDateThenReAdjustMap} selectedDate={selectedDate} />
     </div>
   );
 };

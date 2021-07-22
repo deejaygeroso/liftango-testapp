@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const handleSelectedButton = (isSelected) => {
+  if (isSelected) {
+    return 'background-color: #b94f72;';
+  }
+  return 'background-color: palevioletred;';
+};
+
 const StyledTripButton = styled.button`
-  background: palevioletred;
+  background-color: palevioletred;
   border: none;
   border-radius: 3px;
   color: white;
@@ -10,10 +17,16 @@ const StyledTripButton = styled.button`
   height: 30px;
   margin: 5px 0 5px 5px;
   width: 120px;
+
+  &:hover {
+    background-color: #b94f72;
+  }
+
+  ${({ isSelected }) => handleSelectedButton(isSelected)};
 `;
 
 const TripButtons = (props) => {
-  const { selectDate, trips } = props;
+  const { selectDate, selectedDate, trips } = props;
 
   const getDatesWithExistingTrips = (listOfTrips) => {
     const listOfTripsInDateString = listOfTrips.map((trip) => new Date(trip.startTime).toDateString());
@@ -23,7 +36,7 @@ const TripButtons = (props) => {
   const datesWithTrips = getDatesWithExistingTrips(trips);
 
   return datesWithTrips.map((tripDate) => (
-    <StyledTripButton key={`tripButton_${tripDate}`} onClick={() => selectDate(tripDate)}>
+    <StyledTripButton key={`tripButton_${tripDate}`} onClick={() => selectDate(tripDate)} isSelected={tripDate === selectedDate}>
       {tripDate}
     </StyledTripButton>
   ));
