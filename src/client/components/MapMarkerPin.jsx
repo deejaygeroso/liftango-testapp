@@ -38,7 +38,8 @@ const StyledMarkerCircle = styled.div`
   & > div {
     background-color: white;
     border-radius: 50%;
-    font-size: 12px;
+    color: pink;
+    font-size: 10px;
     height: 14px;
     left: 50%;
     margin: -7px 0px 0px -7px;
