@@ -69,7 +69,7 @@ const App = () => {
         </GoogleMap>
       )}
       {datesWithTrips.map((tripDate) => (
-        <TripButton tripDate={tripDate} selectDate={selectDate} />
+        <TripButton key={`tripButton_${tripDate}`} tripDate={tripDate} selectDate={selectDate} />
       ))}
     </div>
   );
